@@ -21,9 +21,19 @@ class PetTest {
     void saveAndGet() {
         em.persist(person);
         Pet original = new Pet("Murka", person);
-        Pet withId = em.persist(original);
-        Pet fromDb = em.find(Pet.class, em.getId(withId));
+        Pet fromDb = em.persistFlushFind(original);
 
         assertEquals(original.getName(), fromDb.getName());
+    }
+
+    @Commit
+    @Test
+    void savePetAndGetPerson() {
+        em.persist(person);
+        Pet originalPet = new Pet("Zhuchka", person);
+        em.persistAndFlush(originalPet);
+        Person ownerFromDb = em.refresh(person);
+
+        assertEquals(1, ownerFromDb.getPets().size());
     }
 }

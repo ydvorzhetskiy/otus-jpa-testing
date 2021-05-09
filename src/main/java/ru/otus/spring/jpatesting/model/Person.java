@@ -1,5 +1,6 @@
 package ru.otus.spring.jpatesting.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @SequenceGenerator(
         name = "person_seq_gen",
         sequenceName = "person_seq",
