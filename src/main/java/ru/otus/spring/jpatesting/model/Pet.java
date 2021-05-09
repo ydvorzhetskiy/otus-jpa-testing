@@ -2,10 +2,12 @@ package ru.otus.spring.jpatesting.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
+@NoArgsConstructor
 @SequenceGenerator(
         name = "pet_seq_gen",
         sequenceName = "pet_seq",
@@ -28,4 +30,9 @@ public class Pet {
     @JoinColumn(name = "owner_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Person owner;
+
+    public Pet(String name, Person owner) {
+        this.name = name;
+        this.owner = owner;
+    }
 }
